@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}MyBlog{% endblock %}
+
+{% block content %}
+  {% for post in posts %}
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-8">
+          <div class="card-body">
+            <a href="{{ post.get_absolute_url }}">
+              <h5 class="card-title">{{ post.title }}</h5>
+            </a>
+            <p class="card-text"><small class="text-muted">Author: {{ post.author.first_name }} {{ post.author.last_name }}</small></p>
+            <p class="card-text">{{ post.body | truncatewords:20|linebreaks }}</p>
+            <p class="card-text"><small class="text-muted">Published: {{ post.publish }}</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  {% include 'blog/pagination.html' with page=page_obj %}
+{% endblock %}
