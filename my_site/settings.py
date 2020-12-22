@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import environ
 import django_heroku
+import os
 
 env = environ.Env(
     # set casting, default value
@@ -31,10 +32,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG') # False if not in os.environ
+DEBUG = os.environ['DEBUG'] # False if not in os.environ
 
 ALLOWED_HOSTS = ['blogapp-django-py.herokuapp.com']
 
@@ -80,10 +81,10 @@ TEMPLATES = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = os.environ['EMAIL_PORT']
 EMAIL_USE_TLS = True
 
 WSGI_APPLICATION = 'my_site.wsgi.application'
